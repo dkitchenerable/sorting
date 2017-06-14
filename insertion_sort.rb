@@ -1,4 +1,4 @@
-require_relative 'swappable.rb'
+require_relative 'utility.rb'
 
 class InsertionSort
   def self.sort(arr)

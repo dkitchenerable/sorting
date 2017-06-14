@@ -1,4 +1,4 @@
-require_relative 'swappable.rb'
+require_relative 'utility.rb'
 class HeapSort
   def self.sort(arr)
     heap_size = arr.size
@@ -7,7 +7,7 @@ class HeapSort
   
     n = heap_size - 1
     while n > 0
-      Swappable.swap(arr, 0, n)
+      Utility.swap(arr, 0, n)
       max_heapify(arr, 1, n)
       n -=1
     end
@@ -39,7 +39,7 @@ class HeapSort
     end
     # if not the same swap, with largest child and re-run with largest root
     if root != index
-      Swappable.swap(arr, root - 1, index - 1)
+      Utility.swap(arr, root - 1, index - 1)
       max_heapify(arr, root, heap_size)
     end
   end
