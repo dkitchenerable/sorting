@@ -1,4 +1,4 @@
-require_relative 'swappable.rb'
+require_relative 'utility.rb'
 class QuickSort
   def self.sort(arr)
     quick_sort(arr, 0, arr.size - 1)
@@ -21,10 +21,10 @@ class QuickSort
     for i in (left + 1)..right
       if arr[i] <= pivot_element
         pivot_index += 1
-        Swappable.swap(arr, i, pivot_index)
+        Utility.swap(arr, i, pivot_index)
       end
     end
-    Swappable.swap(arr, left, pivot_index)
+    Utility.swap(arr, left, pivot_index)
     return pivot_index
   end
 end
