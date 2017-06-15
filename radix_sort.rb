@@ -1,38 +1,37 @@
 class RadixSort
   def self.sort(arr)
-    return arr if arr.size < 2
     sorted = false
     multiplier = 1
     while !sorted
-      radix_array = radix_sort(arr, multiplier)
+      # size for 0-9 digits
+      radix_array = Array.new(10)
+      sorted = radix_sort(arr, radix_array, multiplier)
       place_in_array(arr, radix_array)
-      # can reason that fill first index of radix array means complete
-      sorted = radix_array[0] ? radix_array[0].size == arr.size : false
       multiplier *= 10
     end
 
     return arr
   end
 
-  def self.radix_sort(arr, multiplier)
-    radix_arr = Array.new(10)
+  def self.radix_sort(arr, r_array, multiplier)
     mod = 10*multiplier
     divisor = 1*multiplier
+    num_zeros = 0
     arr.each do |num|
-      radix_i = ((num % mod) / divisor).floor
-      radix_arr[radix_i] ? radix_arr[radix_i] << num : radix_arr[radix_i] = [num]
+      r_index = ((num % mod) / divisor).floor
+      r_array[r_index] ? r_array[r_index] << num : r_array[r_index] = [num]
+      num_zeros += 1 if r_index == 0
     end
-
-    return radix_arr
+    return num_zeros == arr.size
   end
 
   def self.place_in_array(arr, radix_array)
-    arr_i = 0
+    index = 0
     radix_array.each do |nums|
       next unless nums
       nums.each do |num|
-        arr[arr_i] = num
-        arr_i += 1
+        arr[index] = num
+        index += 1
       end
     end
   end
