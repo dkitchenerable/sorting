@@ -1,4 +1,6 @@
 require_relative 'utility.rb'
+
+# implementation uses leftmost element as pivot
 class QuickSort
   def self.sort(arr)
     quick_sort(arr, 0, arr.size - 1)
@@ -21,7 +23,8 @@ class QuickSort
     for i in (left + 1)..right
       if arr[i] <= pivot_element
         pivot_index += 1
-        Utility.swap(arr, i, pivot_index)
+        # avoid unneeded swaps if element is in correct spot
+        Utility.swap(arr, i, pivot_index) if i != pivot_index
       end
     end
     Utility.swap(arr, left, pivot_index)
